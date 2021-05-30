@@ -37,7 +37,8 @@ flags.DEFINE_string('trace_filename', None, 'Trace file name.')
 
 flags.DEFINE_integer('threads', 0, 'Number of threads.')
 flags.DEFINE_integer('bm_runs', 10, 'Number of benchmark runs.')
-flags.DEFINE_string('tensorrt', None, 'TensorRT mode: {None, FP32, FP16, INT8}')
+flags.DEFINE_string('tensorrt', None,
+                    'TensorRT mode: {None, FP32, FP16, INT8}')
 flags.DEFINE_bool('delete_logdir', True, 'Whether to delete logdir.')
 flags.DEFINE_bool('freeze', False, 'Freeze graph.')
 flags.DEFINE_bool('use_xla', False, 'Run with xla optimization.')

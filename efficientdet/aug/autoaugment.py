@@ -79,6 +79,24 @@ def policy_v1():
   return policy
 
 
+def policy_v5():
+  """autoaugment policy that was used in autoaugment detection paper."""
+  # each tuple is an augmentation operation of the form
+  # (operation, probability, magnitude). each element in policy is a
+  # sub-policy that will be applied sequentially on the image.
+  policy = [
+      [('Color', 1.0, 6), ('Equalize', 1.0, 2)],
+      [('Sharpness', 1.0, 4), ('SolarizeAdd', 0.4, 4)],
+      [('SolarizeAdd', 0.6, 8), ('Brightness', 0.8, 2)],
+      [('Contrast', 1.0, 10), ('SolarizeAdd', 0.2, 8), ('Equalize', 0.2, 4)],
+      [('Contrast', 1.0, 10), ('Equalize', 0.2, 4)],
+      [('AutoContrast', 0.8, 10), ('Contrast', 0.2, 10)],
+      [('Solarize', 0.4, 6), ('SolarizeAdd', 0.2, 10)],
+      [('Posterize', 0.6, 8)],
+  ]
+
+  return policy
+
 def policy_vtest():
   """Autoaugment test policy for debugging."""
   # Each tuple is an augmentation operation of the form
@@ -1611,7 +1629,7 @@ def distort_image_with_autoaugment(image,
   """
   logging.info('Using autoaugmention policy: %s', augmentation_name)
   available_policies = {'v0': policy_v0, 'v1': policy_v1, 'v2': policy_v2,
-                        'v3': policy_v3, 'test': policy_vtest}
+                        'v3': policy_v3, 'test': policy_vtest, 'v5': policy_v5}
   if augmentation_name not in available_policies:
     raise ValueError('Invalid augmentation_name: {}'.format(augmentation_name))
 

@@ -401,6 +401,7 @@ class InputReader:
     return options
 
   def __call__(self, params, input_context=None, batch_size=None):
+    import pdb; pdb.set_trace()
     input_anchors = anchors.Anchors(params['min_level'], params['max_level'],
                                     params['num_scales'],
                                     params['aspect_ratios'],
